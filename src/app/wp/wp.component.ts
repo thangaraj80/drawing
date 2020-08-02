@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { CanvasDesigner } from 'assets/canvas-designer-widget.js'
+ import { CanvasDesigner } from '../../assets/canvas-designer-widget.js'
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -37,11 +37,23 @@ selectedIcon =" pencil"
 constructor(private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
+    
   
+     let designer = new CanvasDesigner();
+     designer.setTools(this.tools);
+    //  designer.setTools(this.selectedIcon);
   
-//     let designer = new CanvasDesigner();
-// designer.widgetHtmlURL = 'assets/canvas-designer.html';
-// designer.widgetJsURL = './assets/widget.js';
+ designer.widgetHtmlURL = '../../assets/widget.html';
+ designer.widgetJsURL = '../../assets/widget.js';
+ designer.widgetHtmlURL = 'https://cdn.webrtc-experiment.com/Canvas-Designer/widget.html';
+designer.widgetJsURL = 'https://cdn.webrtc-experiment.com/Canvas-Designer/widget.js';
+if(!designer.iframe) {
+  designer.appendTo(document.body);
+  // try to load in div
+ // designer.appendTo(document.getElementById('draw_tools'));
+}
+designer.iframe.style.border = '5px solid red';
+
 // //designer.appendTo(document.body || document.documentElement)
 // designer.appendTo = function(parentNode, callback) {
 //   callback = callback || function() {};
